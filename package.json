@@ -1,0 +1,28 @@
+{
+  "name": "json-style-converter",
+  "version": "1.0.0",
+  "description": "A tiny utility module for converting json objects between various coding styles",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "node tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexnm/json-style-converter.git"
+  },
+  "keywords": [
+    "json",
+    "camelcase",
+    "snakecase",
+    "convert"
+  ],
+  "author": "Alex M",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexnm/json-style-converter/issues"
+  },
+  "homepage": "https://github.com/alexnm/json-style-converter#readme"
+}
