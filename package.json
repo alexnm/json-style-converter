@@ -19,8 +19,11 @@
     "snakecase",
     "convert"
   ],
-  "author": "Alex M",
-  "license": "ISC",
+  "author": {
+        "name": "Alex Moldovan",
+        "email": "alex.n.moldovan@gmail.com"
+    },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/alexnm/json-style-converter/issues"
   },

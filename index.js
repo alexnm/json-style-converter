@@ -28,12 +28,12 @@ function traverse( obj, transform ) {
         return obj; // must be an object
     }
 
-    if ( !isSimpleObject( obj ) ) {
-        return obj; // avoiding String and other custom objects
-    }
-
     if ( isArray( obj ) ) {
         return obj.map( el => traverse( el, transform ) );
+    }
+
+    if ( !isSimpleObject( obj ) ) {
+        return obj; // avoiding String and other custom objects
     }
 
     return Object.keys( obj ).reduce( ( acc, key ) => {
