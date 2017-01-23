@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "A tiny utility module for converting json objects between various coding styles",
   "main": "index.js",
-  "directories": {
-    "example": "example"
-  },
+  "files": [
+    "es5/index.js",
+    "index.js"
+  ],
   "scripts": {
-    "test": "node tests.js"
+    "test": "node tests.js",
+    "build": "babel index.js --out-dir es5"
   },
   "repository": {
     "type": "git",
@@ -20,12 +22,16 @@
     "convert"
   ],
   "author": {
-        "name": "Alex Moldovan",
-        "email": "alex.n.moldovan@gmail.com"
-    },
+    "name": "Alex Moldovan",
+    "email": "alex.n.moldovan@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/alexnm/json-style-converter/issues"
   },
-  "homepage": "https://github.com/alexnm/json-style-converter#readme"
+  "homepage": "https://github.com/alexnm/json-style-converter#readme",
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-es2015": "^6.22.0"
+  }
 }
