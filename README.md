@@ -34,6 +34,15 @@ converter.snakeToCamelCase( {
 }*/
 ```
 
+For using the es5 browser compatible Build
+```javascript
+const converter = require( "json-style-converter/es5" );
+```
+or
+```javascript
+import converter from "json-style-converter/es5";
+```
+
 ## API
 ### converter.snakeToCamelCase
 Transforms all the keys of object recursively from `snake_case` to `camelCase`.
