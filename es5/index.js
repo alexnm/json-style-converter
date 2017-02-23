@@ -58,13 +58,13 @@ function isSimpleObject(obj) {
 }
 
 function snakeToCamel(str) {
-    return str.replace(/[_.-](\w|$)/g, function (match, value) {
+    return str.replace(/[_-](\w|$)/g, function (match, value) {
         return value.toUpperCase();
     });
 }
 
 function camelToSnake(str) {
-    return str.replace(/[A-Z]/g, function (upperCaseLetter) {
-        return "_" + upperCaseLetter.toLowerCase();
+    return str.replace(/[a-z][A-Z]/g, function (letters) {
+        return letters[0] + "_" + letters[1].toLowerCase();
     });
 }
