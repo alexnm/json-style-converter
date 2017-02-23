@@ -52,9 +52,9 @@ function isSimpleObject( obj ) {
 }
 
 function snakeToCamel( str ) {
-    return str.replace( /[_.-](\w|$)/g, ( match, value ) => value.toUpperCase( ) );
+    return str.replace( /[_-](\w|$)/g, ( match, value ) => value.toUpperCase( ) );
 }
 
 function camelToSnake( str ) {
-    return str.replace( /[A-Z]/g, ( upperCaseLetter ) => `_${ upperCaseLetter.toLowerCase( ) }` );
+    return str.replace( /[a-z][A-Z]/g, ( letters ) => `${ letters[0] }_${ letters[1].toLowerCase( ) }` );
 }

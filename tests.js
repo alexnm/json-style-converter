@@ -29,6 +29,8 @@ console.assert( converter.snakeToCamelCase( null ) === null );
 console.assert( converter.snakeToCamelCase( 42 ) === 42 );
 console.assert( converter.snakeToCamelCase( "42" ) === "42" );
 console.assert( converter.snakeToCamelCase( ) === undefined );
+console.assert( converter.camelToSnakeCase( "Edgecase" ) === "Edgecase" );
+console.assert( converter.camelToSnakeCase( "Edge.Case" ) === "Edge.Case" );
 
 // Test with object
 let result = converter.snakeToCamelCase( snake_obj );
@@ -55,6 +57,8 @@ console.assert( converter.camelToSnakeCase( null ) === null );
 console.assert( converter.camelToSnakeCase( 42 ) === 42 );
 console.assert( converter.camelToSnakeCase( "42" ) === "42" );
 console.assert( converter.camelToSnakeCase( ) === undefined );
+console.assert( converter.camelToSnakeCase( "Edgecase" ) === "Edgecase" );
+console.assert( converter.camelToSnakeCase( "Edge.Case" ) === "Edge.Case" );
 
 // Test with object
 result = converter.camelToSnakeCase( camelObj );
