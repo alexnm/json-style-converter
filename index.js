@@ -6,9 +6,9 @@ function snakeToCamelCase( obj ) {
     return traverse( obj, snakeToCamel );
 }
 
-function camelToSnakeCase( obj ) {
+function camelToSnakeCase( obj, options ) {
     if ( typeof obj === "string" ) {
-        return camelToSnake( obj );
+        return camelToSnake( obj, options );
     }
 
     return traverse( obj, camelToSnake );
@@ -55,6 +55,58 @@ function snakeToCamel( str ) {
     return str.replace( /[_-](\w|$)/g, ( match, value ) => value.toUpperCase( ) );
 }
 
-function camelToSnake( str ) {
-    return str.replace( /[a-z][A-Z]/g, ( letters ) => `${ letters[0] }_${ letters[1].toLowerCase( ) }` );
+const defaultOptions = {
+  numberInUpperCase: false
+}
+
+function camelToSnake( str, options = defaultOptions) {
+    // Check is options is an object? If no use default settings
+    // [] === [object Array]
+    // {} === [object Object]
+    // 1 === [object Number] etc.
+    if(Object.prototype.toString.call({}) !== '[object Object]') {
+      options = defaultOptions;
+    }
+
+    const config = Object.assign({}, options);
+
+    const { numberInUpperCase } = config;
+
+    if(numberInUpperCase) {
+      const pattern = /[a-zA-Z_]+|[0-9]+/g;
+
+      const convertedStrig = convertCamelToSnake(str);
+      const splitedString = convertedStrig.match(pattern);
+
+      const result = splitedString.reduce((acc, item, index, arr) => {
+        const arrayLength = arr.length - 1;
+
+        if(arrayLength === index) {
+          return acc + `${item.toLowerCase()}`
+        }
+
+        return acc + `${item.toLowerCase()}_`;
+      }, "");
+
+      return result;
+    } else {
+      const result = convertCamelToSnake(str);
+
+      return result;
+    }
+
+}
+
+function convertCamelToSnake(str) {
+  const pattern = /[a-z][A-Z]/g;
+
+  const convertedString = str.replace(pattern, letters => {
+    const leftOperand = letters[0];
+    const rightOperand = letters[1].toLowerCase();
+    const result = `${leftOperand}_${rightOperand}`;
+
+    return result ;
+  });
+
+  return convertedString;
 }
