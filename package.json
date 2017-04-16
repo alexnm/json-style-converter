@@ -1,6 +1,6 @@
 {
   "name": "json-style-converter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A tiny utility module for converting json objects between various coding styles",
   "main": "index.js",
   "files": [

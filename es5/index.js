@@ -11,11 +11,17 @@ function snakeToCamelCase(obj) {
 }
 
 function camelToSnakeCase(obj) {
-    if (typeof obj === "string") {
-        return camelToSnake(obj);
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    if (!isSimpleObject(options)) {
+        return obj; // avoiding String and other custom objects
     }
 
-    return traverse(obj, camelToSnake);
+    if (typeof obj === "string") {
+        return camelToSnake(obj, options);
+    }
+
+    return traverse(obj, camelToSnake, options);
 }
 
 module.exports = {
@@ -23,7 +29,7 @@ module.exports = {
     camelToSnakeCase: camelToSnakeCase
 };
 
-function traverse(obj, transform) {
+function traverse(obj, transform, options) {
     if (!obj) {
         return obj;
     }
@@ -34,7 +40,7 @@ function traverse(obj, transform) {
 
     if (isArray(obj)) {
         return obj.map(function (el) {
-            return traverse(el, transform);
+            return traverse(el, transform, options);
         });
     }
 
@@ -43,8 +49,8 @@ function traverse(obj, transform) {
     }
 
     return Object.keys(obj).reduce(function (acc, key) {
-        var convertedKey = transform(key);
-        acc[convertedKey] = traverse(obj[key], transform);
+        var convertedKey = transform(key, options);
+        acc[convertedKey] = traverse(obj[key], transform, options);
         return acc;
     }, {});
 }
@@ -63,8 +69,17 @@ function snakeToCamel(str) {
     });
 }
 
-function camelToSnake(str) {
-    return str.replace(/[a-z][A-Z]/g, function (letters) {
+function camelToSnake(str, _ref) {
+    var digitsAreUpperCase = _ref.digitsAreUpperCase;
+
+    var firstPass = str.replace(/[a-z][A-Z]/g, function (letters) {
         return letters[0] + "_" + letters[1].toLowerCase();
     });
+    if (digitsAreUpperCase) {
+        return firstPass.replace(/[0-9]/g, function (digit) {
+            return "_" + digit;
+        });
+    }
+
+    return firstPass;
 }
