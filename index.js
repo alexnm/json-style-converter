@@ -6,12 +6,16 @@ function snakeToCamelCase( obj ) {
     return traverse( obj, snakeToCamel );
 }
 
-function camelToSnakeCase( obj ) {
-    if ( typeof obj === "string" ) {
-        return camelToSnake( obj );
+function camelToSnakeCase( obj, options = { } ) {
+    if ( !isSimpleObject( options ) ) {
+        return obj; // avoiding String and other custom objects
     }
 
-    return traverse( obj, camelToSnake );
+    if ( typeof obj === "string" ) {
+        return camelToSnake( obj, options );
+    }
+
+    return traverse( obj, camelToSnake, options );
 }
 
 module.exports = {
@@ -19,7 +23,7 @@ module.exports = {
     camelToSnakeCase
 };
 
-function traverse( obj, transform ) {
+function traverse( obj, transform, options ) {
     if ( !obj ) {
         return obj;
     }
@@ -29,7 +33,7 @@ function traverse( obj, transform ) {
     }
 
     if ( isArray( obj ) ) {
-        return obj.map( el => traverse( el, transform ) );
+        return obj.map( el => traverse( el, transform, options ) );
     }
 
     if ( !isSimpleObject( obj ) ) {
@@ -37,8 +41,8 @@ function traverse( obj, transform ) {
     }
 
     return Object.keys( obj ).reduce( ( acc, key ) => {
-        const convertedKey = transform( key );
-        acc[ convertedKey ] = traverse( obj[ key ], transform );
+        const convertedKey = transform( key, options );
+        acc[ convertedKey ] = traverse( obj[ key ], transform, options );
         return acc;
     }, { } );
 }
@@ -55,6 +59,11 @@ function snakeToCamel( str ) {
     return str.replace( /[_-](\w|$)/g, ( match, value ) => value.toUpperCase( ) );
 }
 
-function camelToSnake( str ) {
-    return str.replace( /[a-z][A-Z]/g, ( letters ) => `${ letters[0] }_${ letters[1].toLowerCase( ) }` );
+function camelToSnake( str, { digitsAreUpperCase } ) {
+    const firstPass = str.replace( /[a-z][A-Z]/g, ( letters ) => `${ letters[0] }_${ letters[1].toLowerCase( ) }` );
+    if ( digitsAreUpperCase ) {
+        return firstPass.replace( /[0-9]/g, ( digit ) => `_${ digit }` );
+    }
+
+    return firstPass;
 }

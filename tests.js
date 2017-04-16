@@ -74,3 +74,7 @@ console.assert( result[ 0 ].snake_case === "A simple test" );
 console.assert( result[ 0 ].camel_case === 42 );
 console.assert( result[ 0 ].array[ 0 ].it_works === true );
 console.assert( result[ 0 ].array[ 1 ].it_works === null );
+
+// Options
+console.assert( converter.camelToSnakeCase( "number1" ) === "number1" );
+console.assert( converter.camelToSnakeCase( "number1", { digitsAreUpperCase: true } ) === "number_1" );
