@@ -20,7 +20,7 @@ function camelToSnakeCase( obj, options = { } ) {
 
 module.exports = {
     snakeToCamelCase,
-    camelToSnakeCase
+    camelToSnakeCase,
 };
 
 function traverse( obj, transform, options ) {
@@ -60,7 +60,7 @@ function snakeToCamel( str ) {
 }
 
 function camelToSnake( str, { digitsAreUpperCase } ) {
-    const firstPass = str.replace( /[a-z][A-Z]/g, ( letters ) => `${ letters[0] }_${ letters[1].toLowerCase( ) }` );
+    const firstPass = str.replace( /[a-z][A-Z]/g, ( letters ) => `${ letters[ 0 ] }_${ letters[ 1 ].toLowerCase( ) }` );
     if ( digitsAreUpperCase ) {
         return firstPass.replace( /[0-9]/g, ( digit ) => `_${ digit }` );
     }

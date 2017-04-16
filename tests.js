@@ -4,20 +4,20 @@ const snake_obj = Object.freeze( {
     snake_case: "A simple test",
     camelCase: 42,
     array: [ {
-        it_works: true
+        it_works: true,
     }, {
-        it_works: null
-    } ]
+        it_works: null,
+    } ],
 } );
 
 const camelObj = Object.freeze( {
     snake_case: "A simple test",
     camelCase: 42,
     array: [ {
-        itWorks: true
+        itWorks: true,
     }, {
-        itWorks: null
-    } ]
+        itWorks: null,
+    } ],
 } );
 
 // A new object is created
@@ -46,7 +46,6 @@ console.assert( result[ 0 ].snakeCase === "A simple test" );
 console.assert( result[ 0 ].camelCase === 42 );
 console.assert( result[ 0 ].array[ 0 ].itWorks === true );
 console.assert( result[ 0 ].array[ 1 ].itWorks === null );
-
 
 // A new object is created
 console.assert( camelObj !== converter.camelToSnakeCase( camelObj ) );
